@@ -7,7 +7,7 @@ const Home: NextPage = () => {
       <AppLogo size="lg" />
 
       <span className="flex items-baseline gap-x-2">
-        <span className="Font_caption_sm">Visit us at</span>
+        <span className="Font_caption_sm">Visit KimKim at</span>
         <a className="inline Font_body_sm hover:text-semantic_info hover:underline" href="https://kimkim.app">
           https://kimkim.app
         </a>
