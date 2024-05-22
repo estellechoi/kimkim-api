@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { cors, runMiddleware } from '../cors';
 
 export enum Fiats {
   KRW = 'KRW',
@@ -20,6 +21,8 @@ export interface ForexApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  await runMiddleware(req, res, cors);
+
   const base_currency = req.query.base_currency ?? Fiats.USD;
   const currencies = req.query.currencies;
 

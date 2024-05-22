@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { axiosUpbitClient, getUpbitAuthorizationHeader } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export interface UpbitWalletStatusApiData {
   block_elapsed_minutes: number;
@@ -13,6 +14,8 @@ export interface UpbitWalletStatusApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<readonly UpbitWalletStatusApiData[]>) => {
+  await runMiddleware(req, res, cors);
+
   const Authorization = getUpbitAuthorizationHeader();
   axiosUpbitClient.defaults.headers['Authorization'] = Authorization;
 

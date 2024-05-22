@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { axiosHtxClient, getHtxSignaturedURLParams } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export interface HtxApiResponse<T> {
   data: T | undefined;
@@ -43,6 +44,8 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<HtxApiResponse<readonly HtxWalletStatusApiData[]> | undefined>,
 ) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = '/v2/reference/currencies';
   // const params = { currency: 'usdt' };
   const signaturedParams = getHtxSignaturedURLParams(endpoint);

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BithumbApiResponse, axiosBithumbClient } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export type BithumbWalletApiData = Readonly<{
   currency: string;
@@ -9,6 +10,8 @@ export type BithumbWalletApiData = Readonly<{
 }>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = '/public/assetsstatus/multichain/ALL';
 
   const response = await axiosBithumbClient.get<BithumbApiResponse<readonly BithumbWalletApiData[]>>(endpoint).catch((err) => {

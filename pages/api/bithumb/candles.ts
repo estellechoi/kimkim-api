@@ -1,10 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BithumbApiResponse, axiosBithumbClient } from '.';
+import { cors, runMiddleware } from '../cors';
 
 // 기준시간, 시가, 종가, 고가, 저가, 거래량
 export type BithumbCandleApiData = readonly [number, `${number}`, `${number}`, `${number}`, `${number}`, `${number}`];
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = `/public/candlestick/${req.query.market}/1m`;
 
   const response = await axiosBithumbClient

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BithumbApiResponse, axiosBithumbClient } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export type BithumbTickerApiData = Readonly<{
   opening_price: `${number}`;
@@ -16,6 +17,8 @@ export type BithumbTickerApiData = Readonly<{
 }>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = '/public/ticker/ALL_KRW';
 
   const response = await axiosBithumbClient

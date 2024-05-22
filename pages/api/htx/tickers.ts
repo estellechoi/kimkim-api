@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { axiosHtxClient, getHtxSignaturedURLParams } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export interface HtxApiResponse<T> {
   data: T | undefined;
@@ -23,6 +24,8 @@ export interface HtxMarketApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<HtxApiResponse<readonly HtxMarketApiData[]> | undefined>) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = '/market/tickers';
   const signaturedParams = getHtxSignaturedURLParams(endpoint);
 

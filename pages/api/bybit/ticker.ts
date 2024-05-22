@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BybitApiResponse, bybitAxiosClient } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export interface BybitTickerItemApiData {
   symbol: string;
@@ -23,6 +24,8 @@ export interface BybitTickerApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<BybitApiResponse<BybitTickerApiData> | undefined>) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = '/v5/market/tickers?category=spot';
 
   const response = await bybitAxiosClient.get<BybitApiResponse<BybitTickerApiData> | undefined>(endpoint).catch((err) => {

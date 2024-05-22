@@ -15,6 +15,7 @@
     "@types/crypto-js": "^4.2.2",
     "axios": "^1.6.7",
     "bignumber.js": "^9.1.2",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "crypto-js": "^4.2.0",
     "jose": "^5.2.3",
@@ -29,6 +30,7 @@
     "webpack": "^5.90.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^8.0.0",
     "@types/next-pwa": "^5.6.9",
     "@types/node": "20.11.20",

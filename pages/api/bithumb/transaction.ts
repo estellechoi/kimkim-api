@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BithumbApiResponse, axiosBithumbClient } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export type BithumbTransactionApiData = Readonly<{
   transaction_date: string;
@@ -10,6 +11,8 @@ export type BithumbTransactionApiData = Readonly<{
 }>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = `/public/transaction_history/${req.query.market}`;
 
   const response = await axiosBithumbClient

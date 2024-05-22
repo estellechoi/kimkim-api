@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BybitApiResponse, bybitAxiosClient, getBybitAuthorizedHeaders } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export interface BybitWalletStatusItemApiData {
   name: string;
@@ -24,6 +25,8 @@ export interface BybitWalletStatusApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<BybitApiResponse<BybitWalletStatusApiData> | undefined>) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = '/v5/asset/coin/query-info';
   const authorizedHeaders = getBybitAuthorizedHeaders({});
 

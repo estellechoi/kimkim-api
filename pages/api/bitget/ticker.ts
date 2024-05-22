@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BitgetApiResponse, bitgetAxiosClient, getBitgetAuthorizedHeaders } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export interface BitgetWalletTickerApiData {
   symbol: string;
@@ -24,6 +25,8 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<BitgetApiResponse<readonly BitgetWalletTickerApiData[]> | undefined>,
 ) => {
+  await runMiddleware(req, res, cors);
+
   const endpoint = '/api/v2/spot/market/tickers';
   const authorizedHeaders = getBitgetAuthorizedHeaders(endpoint, {});
 

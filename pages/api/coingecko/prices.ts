@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { coingeckoAxiosClient } from '.';
+import { cors, runMiddleware } from '../cors';
 
 export interface CoinGeckoCoinPriceApiData {
   id: string;
@@ -31,6 +32,8 @@ export interface CoinGeckoCoinPriceApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  await runMiddleware(req, res, cors);
+
   const response = await coingeckoAxiosClient
     .get<readonly CoinGeckoCoinPriceApiData[]>('/coins/markets', { params: { ...req.query, vs_currency: 'USD' } })
     .catch((err) => {
