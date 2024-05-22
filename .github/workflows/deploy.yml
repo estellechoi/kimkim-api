@@ -40,12 +40,12 @@ jobs:
           fi
 
           # Clone the repository if it does not exist
-          if [ ! -d "~/kimkim" ]; then
-            git clone https://github.com/estellechoi/kimkim.git ~/kimkim
+          if [ ! -d "~/kimkim-api" ]; then
+            git clone https://github.com/estellechoi/kimkim-api.git ~/kimkim-api
           fi
 
           # Move to the project directory
-          cd ~/kimkim
+          cd ~/kimkim-api
 
           # Pull latest changes
           git pull
@@ -76,13 +76,13 @@ jobs:
           yarn build
 
           # Start or restart the application using PM2
-          pm2 describe kimkim > /dev/null
+          pm2 describe kimkimapi > /dev/null
           if [ $? -ne 0 ]; then
             echo "Process not found, starting..."
-            pm2 start yarn --name "kimkim" -- start
+            pm2 start yarn --name "kimkimapi" -- start
           else
             echo "Process found, restarting..."
-            pm2 restart kimkim --update-env
+            pm2 restart kimkimapi --update-env
           fi
 
           EOF
