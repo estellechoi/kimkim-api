@@ -1,0 +1,22 @@
+{
+	"editor.formatOnSave": true,
+	"eslint.enable": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.fixAll": "explicit"
+	},
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"json"
+	],
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"files.associations": {
+		"*.scss": "postcss"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	}
+}
