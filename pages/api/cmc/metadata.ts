@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { CMCResponse, coinMarketCapAxiosClient } from '.';
-import { cors, runMiddleware } from '../cors';
 
 export type CoinMarketCapMetadataApiData = {
   urls: {
@@ -49,8 +48,6 @@ export type CoinMarketCapMetadataApiData = {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  await runMiddleware(req, res, cors);
-
   const response = await coinMarketCapAxiosClient
     .get<
       CMCResponse<{ [symbol: string]: readonly CoinMarketCapMetadataApiData[] }>

@@ -29,7 +29,7 @@ const nextConfig = {
           },
           {
             key: 'Access-Control-Allow-Origin',
-            value: 'https://kimkim.app',
+            value: '*',
           },
           {
             key: 'Access-Control-Allow-Methods',

@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { axiosUpbitClient } from '.';
-import { cors, runMiddleware } from '../cors';
 
 export interface UpbitCandleApiData {
   market: string;
@@ -16,8 +15,6 @@ export interface UpbitCandleApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
-  await runMiddleware(req, res, cors);
-
   const response = await axiosUpbitClient
     .get<readonly UpbitCandleApiData[] | undefined>('/v1/candles/minutes/1', { params: req.query })
     .catch((err) => {

@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { axiosUpbitClient } from '.';
-import { cors, runMiddleware } from '../cors';
 
 export interface UpbitTickerApiData {
   market: string;
@@ -32,8 +31,6 @@ export interface UpbitTickerApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
-  await runMiddleware(req, res, cors);
-
   const response = await axiosUpbitClient.get<readonly UpbitTickerApiData[]>('/v1/ticker', { params: req.query }).catch((err) => {
     return { status: err.response?.status, data: err.response?.data };
   });

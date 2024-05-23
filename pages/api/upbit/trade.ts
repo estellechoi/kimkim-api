@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { axiosUpbitClient } from '.';
-import { cors, runMiddleware } from '../cors';
 
 export interface UpbitTradeApiData {
   market: string;
@@ -15,8 +14,6 @@ export interface UpbitTradeApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
-  await runMiddleware(req, res, cors);
-
   const endpoint = `/v1/trades/ticks`;
   const response = await axiosUpbitClient
     .get<readonly UpbitTradeApiData[] | undefined>(endpoint, { params: { count: '100', ...req.query } })

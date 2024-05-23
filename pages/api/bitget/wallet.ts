@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { BitgetApiResponse, bitgetAxiosClient, getBitgetAuthorizedHeaders } from '.';
-import { cors, runMiddleware } from '../cors';
 
 export interface BitgetWalletStatusApiData {
   coinId: string;
@@ -27,8 +26,6 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<BitgetApiResponse<readonly BitgetWalletStatusApiData[]> | undefined>,
 ) => {
-  await runMiddleware(req, res, cors);
-
   const endpoint = '/api/v2/spot/public/coins';
   const authorizedHeaders = getBitgetAuthorizedHeaders(endpoint, {});
 

@@ -7,7 +7,6 @@ import {
   getBinanceAuthorizedHeaders,
   getBinanceSignaturedParams,
 } from '.';
-import { cors, runMiddleware } from '../cors';
 
 export interface BinanceNetworkApiData {
   addressRegex: string;
@@ -51,8 +50,6 @@ export interface BinanceWalletStatusApiData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<readonly BinanceWalletStatusApiData[] | undefined>) => {
-  await runMiddleware(req, res, cors);
-
   const authorizedHeaders = getBinanceAuthorizedHeaders(binanceApiKey);
 
   const recvWindow = '5000';
