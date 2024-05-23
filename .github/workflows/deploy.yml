@@ -69,6 +69,8 @@ jobs:
             echo "NEXT_PUBLIC_UPBIT_OPEN_API_SECRET_KEY=${{ secrets.NEXT_PUBLIC_UPBIT_OPEN_API_SECRET_KEY }}"
             echo "NEXT_PUBLIC_BITHUMB_API_CONNECT_KEY=${{ secrets.NEXT_PUBLIC_BITHUMB_API_CONNECT_KEY }}"
             echo "NEXT_PUBLIC_BITHUMB_API_SECRET_KEY=${{ secrets.NEXT_PUBLIC_BITHUMB_API_SECRET_KEY }}"
+            echo "NEXT_PUBLIC_KIMKIM_API_KEY=${{ secrets.NEXT_PUBLIC_KIMKIM_API_KEY }}"
+            echo "NEXT_PUBLIC_KIMKIM_SECRET_KEY=${{ secrets.NEXT_PUBLIC_KIMKIM_SECRET_KEY }}"
           } > .env
 
           # Install dependencies and build the project
